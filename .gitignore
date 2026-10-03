@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Runtime data
+models/*
+!models/README.md
+transcripts/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

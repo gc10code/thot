@@ -1,0 +1,124 @@
+/* THOT — lapis lazuli & gold */
+
+QWidget {
+    background-color: #0e1a33;
+    color: #ece4cf;
+    font-size: 10pt;
+}
+
+QLabel#title {
+    color: #e3b452;
+    font-size: 22pt;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+QLabel#subtitle {
+    color: #9aa6c0;
+}
+
+QLabel#clock {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    color: #e3b452;
+    min-width: 70px;
+}
+
+QGroupBox {
+    border: 1px solid #2a3d66;
+    border-radius: 8px;
+    margin-top: 14px;
+    padding: 10px 8px 8px 8px;
+    background-color: #13223f;
+}
+
+QGroupBox QWidget {
+    background-color: transparent;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 12px;
+    padding: 0 4px;
+    color: #e3b452;
+}
+
+QPushButton {
+    background-color: #1b2e55;
+    border: 1px solid #2a3d66;
+    border-radius: 6px;
+    padding: 6px 14px;
+}
+
+QPushButton:hover {
+    border-color: #e3b452;
+}
+
+QPushButton:disabled {
+    color: #5d6a86;
+    border-color: #1f2d4d;
+}
+
+QPushButton#primary {
+    background-color: #d9a441;
+    border-color: #d9a441;
+    color: #0e1a33;
+    font-weight: bold;
+}
+
+QPushButton#primary:hover {
+    background-color: #f0c96a;
+}
+
+QPushButton#primary:disabled {
+    background-color: #5c4d2b;
+    color: #0e1a33;
+}
+
+QLineEdit, QComboBox, QSpinBox, QListWidget, QPlainTextEdit {
+    background-color: #0a1428;
+    border: 1px solid #2a3d66;
+    border-radius: 6px;
+    padding: 4px 6px;
+    selection-background-color: #d9a441;
+    selection-color: #0e1a33;
+}
+
+QLineEdit:focus, QComboBox:focus, QSpinBox:focus {
+    border-color: #e3b452;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #0a1428;
+    border: 1px solid #2a3d66;
+}
+
+QPlainTextEdit#log {
+    font-family: "JetBrains Mono", "Consolas", monospace;
+    font-size: 9pt;
+}
+
+QCheckBox::indicator {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #2a3d66;
+    border-radius: 3px;
+    background-color: #0a1428;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #d9a441;
+    border-color: #d9a441;
+}
+
+QProgressBar {
+    border: 1px solid #2a3d66;
+    border-radius: 6px;
+    background-color: #0a1428;
+    text-align: center;
+    min-height: 20px;
+}
+
+QProgressBar::chunk {
+    border-radius: 5px;
+    background-color: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #b5832c, stop:1 #f0c96a);
+}

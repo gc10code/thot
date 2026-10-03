@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>THOT</title>
+  <defs>
+    <linearGradient id="lapis" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a3060"/>
+      <stop offset="1" stop-color="#0a1428"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6d27a"/>
+      <stop offset="0.55" stop-color="#d9a441"/>
+      <stop offset="1" stop-color="#a8752a"/>
+    </linearGradient>
+    <linearGradient id="goldWave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a8752a"/>
+      <stop offset="1" stop-color="#f6d27a"/>
+    </linearGradient>
+    <clipPath id="tile">
+      <rect width="512" height="512" rx="112"/>
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#lapis)"/>
+
+  <g clip-path="url(#tile)">
+    <!-- lunar crown: full disk cradled by the crescent -->
+    <g fill="url(#gold)">
+      <circle cx="312" cy="98" r="34"/>
+      <path d="M246 84 A66 66 0 0 0 378 84 A66 46 0 0 1 246 84 Z"/>
+    </g>
+
+    <!-- ibis head, neck and beak: the beak is a reed pen that writes the voice -->
+    <path fill="url(#gold)"
+          d="M306 160
+             C354 160 386 194 386 244
+             C386 292 362 326 358 368
+             C354 416 368 466 392 520
+             L298 520
+             C288 466 282 416 290 368
+             C294 334 300 312 294 294
+             C286 280 274 274 262 272
+             C212 290 162 334 126 410
+             L112 426
+             L116 404
+             C146 320 190 260 236 230
+             C248 196 272 160 306 160 Z"/>
+
+    <!-- usekh collar -->
+    <g fill="none" stroke="#0e1a33" stroke-width="7">
+      <path d="M286 418 C312 428 340 428 364 418"/>
+      <path d="M288 446 C316 458 346 458 372 446"/>
+      <path d="M292 474 C320 488 352 488 380 474"/>
+    </g>
+  </g>
+
+  <!-- eye with kohl line -->
+  <path d="M296 220 C312 206 334 208 346 222 C358 222 368 226 378 236
+           C362 234 352 234 344 234 C330 246 308 240 296 220 Z" fill="#0e1a33"/>
+  <circle cx="322" cy="223" r="6.5" fill="#f6d27a"/>
+  <path d="M318 246 C318 258 312 266 304 270" stroke="#0e1a33" stroke-width="6"
+        stroke-linecap="round" fill="none"/>
+
+  <!-- the spoken word -->
+  <g stroke="url(#goldWave)" stroke-width="12" stroke-linecap="round" fill="none">
+    <line x1="52"  y1="428" x2="52"  y2="436"/>
+    <line x1="76"  y1="416" x2="76"  y2="448"/>
+    <line x1="100" y1="424" x2="100" y2="440"/>
+    <line x1="140" y1="414" x2="140" y2="450"/>
+    <line x1="164" y1="398" x2="164" y2="466"/>
+    <line x1="188" y1="418" x2="188" y2="446"/>
+    <line x1="212" y1="406" x2="212" y2="458"/>
+    <line x1="236" y1="422" x2="236" y2="442"/>
+    <line x1="260" y1="429" x2="260" y2="435"/>
+  </g>
+</svg>
