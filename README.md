@@ -4,103 +4,103 @@
 
 <h1 align="center">THOT</h1>
 
-<p align="center"><em>Trascrizione vocale offline — dal suono alla scrittura.</em></p>
+<p align="center"><em>Offline speech-to-text — from sound to writing.</em></p>
 
-Thot, dio egizio dalla testa di ibis, era lo scriba degli dèi: ascoltava e metteva per iscritto.
-**THOT** fa lo stesso con i tuoi file audio, interamente in locale.
+Thoth, the ibis-headed Egyptian god, was the scribe of the gods: he listened and put words into writing.
+**THOT** does the same with your audio files, entirely on your machine.
 
-- **Trascrizione batch** di file e cartelle con [faster-whisper](https://github.com/SYSTRAN/faster-whisper) (CPU o GPU CUDA)
-- **Riconoscimento parlanti** leggero (MFCC + clustering), etichette coerenti su tutto il file
-- **Uscite** `txt`, `srt`, `vtt`, `json`
-- **Dettatura live** dal microfono con [Vosk](https://alphacephei.com/vosk/)
-- **Interfaccia grafica** PyQt5 con drag & drop, avanzamento, annullamento
-- **Correzione grammaticale** opzionale (modello T5, solo inglese)
+- **Batch transcription** of files and folders with [faster-whisper](https://github.com/SYSTRAN/faster-whisper) (CPU or CUDA GPU)
+- **Lightweight speaker labelling** (MFCC + clustering), consistent across the whole file
+- **Outputs** `txt`, `srt`, `vtt`, `json`
+- **Live dictation** from the microphone with [Vosk](https://alphacephei.com/vosk/)
+- **Desktop GUI** (PyQt5) with drag & drop, progress and cancellation
+- **Optional grammar correction** (T5 model, English only)
 
-## Installazione
+## Installation
 
-Requisiti: Python ≥ 3.9. FFmpeg di sistema non è necessario (la decodifica usa PyAV).
+Requires Python ≥ 3.9. A system FFmpeg is not needed (decoding uses PyAV).
 
 ```bash
 git clone https://github.com/gc10code/thot.git
 cd thot
-scripts/install.sh            # crea .venv e installa con GUI + live
+scripts/install.sh            # creates .venv and installs with GUI + live extras
 source .venv/bin/activate
 ```
 
-Su Windows: `scripts\install.bat`. Installazione manuale con gli extra desiderati:
+On Windows: `scripts\install.bat`. Manual install with the extras you need:
 
 ```bash
-pip install -e ".[gui,live]"      # extra: gui, live, grammar, all, dev
+pip install -e ".[gui,live]"      # extras: gui, live, grammar, all, dev
 ```
 
-## Uso
+## Usage
 
-### Trascrizione
+### Transcription
 
 ```bash
-thot transcribe intervista.mp3                       # → transcripts/intervista.txt
-thot transcribe registrazioni/ -o out -f srt -f txt  # intera cartella, più formati
-thot transcribe riunione.m4a -s 3 -m medium          # 3 parlanti, modello medium
-thot transcribe talk.mp4 -l auto -d cuda             # lingua automatica, GPU
+thot transcribe interview.mp3                     # → transcripts/interview.txt
+thot transcribe recordings/ -o out -f srt -f txt  # whole folder, several formats
+thot transcribe meeting.m4a -s 3 -m medium        # 3 speakers, medium model
+thot transcribe talk.mp4 -l auto -d cuda          # auto-detect language, GPU
 ```
 
-| Opzione | Descrizione | Default |
+| Option | Description | Default |
 |---|---|---|
-| `-o, --output` | cartella di uscita | `transcripts` |
+| `-o, --output` | output folder | `transcripts` |
 | `-m, --model` | `tiny` `base` `small` `medium` `large-v3` `turbo` | `small` |
-| `-l, --language` | codice lingua (`it`, `en`, …) o `auto` | `it` |
+| `-l, --language` | language code (`it`, `en`, …) or `auto` | `it` |
 | `-d, --device` | `auto` `cpu` `cuda` | `auto` |
-| `-f, --format` | `txt` `srt` `vtt` `json` (ripetibile) | `txt` |
-| `-s, --speakers N` | etichetta N parlanti (0 = disattivo) | `0` |
-| `-g, --grammar` | correzione grammaticale T5 (inglese) | off |
-| `-r, --recursive` | cerca nelle sottocartelle | off |
-| `--no-vad` | disattiva il filtro di attività vocale | — |
+| `-f, --format` | `txt` `srt` `vtt` `json` (repeatable) | `txt` |
+| `-s, --speakers N` | label N speakers (0 = off) | `0` |
+| `-g, --grammar` | T5 grammar correction (English) | off |
+| `-r, --recursive` | search subfolders | off |
+| `--no-vad` | disable voice-activity filtering | — |
 
-I modelli Whisper vengono scaricati automaticamente al primo uso.
+Whisper models are downloaded automatically on first use.
 
-### Interfaccia grafica
+### Desktop GUI
 
 ```bash
-thot gui        # oppure: thot-gui
+thot gui        # or: thot-gui
 ```
 
 <p align="center"><img src="assets/screenshot.png" width="640" alt="THOT GUI"></p>
 
-### Dettatura live
+### Live dictation
 
 ```bash
-scripts/download_vosk_model.sh        # modello italiano piccolo (48 MB) in models/
-thot live                             # parla; Ctrl+C per terminare
-thot live -o appunti.txt -i 2         # salva su file, usa il dispositivo d'ingresso 2
+scripts/download_vosk_model.sh        # small Italian model (48 MB) into models/
+thot live                             # speak; Ctrl+C to stop
+thot live -o notes.txt -i 2           # also save to a file, use input device 2
 thot live --list-devices
 ```
 
-Il modello si sceglie con `-M <cartella>` o con la variabile `THOT_VOSK_MODEL`. Vedi [models/README.md](models/README.md).
+Pick a model with `-M <folder>` or the `THOT_VOSK_MODEL` environment variable. See [models/README.md](models/README.md).
 
-## Struttura
+## Project layout
 
 ```
 src/thot/
-├── config.py            costanti ed enum condivisi
-├── core/                motore, senza dipendenze da interfaccia
-│   ├── audio.py         decodifica (PyAV) e ricerca file
-│   ├── transcriber.py   pipeline Whisper con progresso e annullamento
-│   ├── diarization.py   etichettatura parlanti
-│   ├── grammar.py       correzione T5 (caricata solo se usata)
+├── config.py            shared constants and enums
+├── core/                engine, no UI dependencies
+│   ├── audio.py         decoding (PyAV) and file discovery
+│   ├── transcriber.py   Whisper pipeline with progress and cancellation
+│   ├── diarization.py   speaker labelling
+│   ├── grammar.py       T5 correction (loaded only when used)
 │   ├── formatters.py    txt / srt / vtt / json
 │   └── models.py        Segment, Transcript
 ├── cli/                 `thot transcribe | live | gui`
-├── gui/                 finestra PyQt5 e worker in thread separato
-└── resources/           icona e foglio di stile
+├── gui/                 PyQt5 window and background worker thread
+└── resources/           icon and stylesheet
 ```
 
-## Sviluppo
+## Development
 
 ```bash
 pip install -e ".[dev]"
 pytest
 ```
 
-## Licenza
+## License
 
 [MIT](LICENSE)
